@@ -1,0 +1,89 @@
+================================================================================
+PORTFOLIO PROJECT: LOG ANALYSIS & DATA QUERYING WITH SQL
+================================================================================
+
+PROJECT DESCRIPTION:
+My organization is working to make their system more secure. It is my job to 
+ensure the system is safe, investigate all potential security issues, and 
+update employee computers as needed. The following steps provide examples of 
+how I used SQL with filters to perform security-related tasks using the 
+`log_in_attempts` and `employees` databases.
+
+--------------------------------------------------------------------------------
+TASK 1: Retrieve after-hours failed login attempts
+--------------------------------------------------------------------------------
+CRITERIA: Investigate all failed login attempts that occurred after business 
+hours (after 18:00).
+
+SQL QUERY:
+SELECT * 
+FROM log_in_attempts 
+WHERE login_time > '18:00' 
+  AND success = FALSE;
+
+--------------------------------------------------------------------------------
+TASK 2: Retrieve login attempts on specific dates
+--------------------------------------------------------------------------------
+CRITERIA: Investigate any login activity that happened on 2022-05-09 or on 
+the day before (2022-05-08) due to a suspicious event.
+
+SQL QUERY:
+SELECT * 
+FROM log_in_attempts 
+WHERE login_date = '2022-05-09' 
+   OR login_date = '2022-05-08';
+
+--------------------------------------------------------------------------------
+TASK 3: Retrieve login attempts outside of Mexico
+--------------------------------------------------------------------------------
+CRITERIA: Investigate anomalous login attempts that occurred completely outside 
+of Mexico (noting that the country dataset represents Mexico as 'MEX' or 'MEXICO').
+
+SQL QUERY:
+SELECT * 
+FROM log_in_attempts 
+WHERE NOT country LIKE 'MEX%';
+
+--------------------------------------------------------------------------------
+TASK 4: Retrieve employees in Marketing (East Building)
+--------------------------------------------------------------------------------
+CRITERIA: Get machine information for employees in the Marketing department 
+located specifically in the East building to apply system updates.
+
+SQL QUERY:
+SELECT * 
+FROM employees 
+WHERE department = 'Marketing' 
+  AND office LIKE 'East%';
+
+--------------------------------------------------------------------------------
+TASK 5: Retrieve employees in Finance or Sales
+--------------------------------------------------------------------------------
+CRITERIA: Gather information for employees in either the Finance or Sales 
+departments to apply a separate target security update.
+
+SQL QUERY:
+SELECT * 
+FROM employees 
+WHERE department = 'Finance' 
+   OR department = 'Sales';
+
+--------------------------------------------------------------------------------
+TASK 6: Retrieve all employees not in IT
+--------------------------------------------------------------------------------
+CRITERIA: Filter for employee machines belonging to individuals who are NOT 
+part of the Information Technology department to run a final security patch.
+
+SQL QUERY:
+SELECT * 
+FROM employees 
+WHERE NOT department = 'Information Technology';
+
+================================================================================
+SUMMARY
+================================================================================
+I applied granular filters to SQL queries to extract specific datasets regarding 
+login attempts and employee machines. By querying the `log_in_attempts` and 
+`employees` tables, I utilized conditional logic via AND, OR, and NOT operators, 
+alongside string matching tools like the LIKE operator and the percentage (%) 
+wildcard, to confidently investigate active corporate threats.
